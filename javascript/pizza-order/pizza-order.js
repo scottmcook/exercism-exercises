@@ -41,14 +41,11 @@ export function pizzaPrice(pizza, ...extras) {
  */
 export function orderPrice(pizzaOrders) {
   let total = 0;
-  if (pizzaOrders.length !== 0 && pizzaOrders !== undefined) {
-    if (pizzaOrders[0].extras !== undefined) {
-      return pizzaPrice(pizzaOrders[0].pizza);
-    }
-    return pizzaPrice(pizzaOrders[0].pizza, pizzaOrders[0].extras);
-  } else {
-    return 0;
+
+  for (let i = 0; i < pizzaOrders.length; i++) {
+    let { pizza, extras } = pizzaOrders[i];
+    total += pizzaPrice(pizza, ...extras);
   }
-  // return total;
-  throw new Error("Please implement the orderPrice function");
+
+  return total;
 }
