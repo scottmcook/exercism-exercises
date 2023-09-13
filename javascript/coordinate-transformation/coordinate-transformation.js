@@ -71,5 +71,17 @@ export function composeTransform(f, g) {
  *  if the arguments are the same on subsequent calls, or compute a new result if they are different.
  */
 export function memoizeTransform(f) {
-  throw new Error("Implement the memoizeTransform function");
+  let cache;
+  let lastArgs;
+
+  return function (x, y) {
+    if (JSON.stringify([x, y]) === JSON.stringify(lastArgs)) {
+      return cache;
+    } else {
+      lastArgs = [x, y];
+      cache = f(x, y);
+
+      return cache;
+    }
+  };
 }
